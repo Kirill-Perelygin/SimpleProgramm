@@ -14,6 +14,7 @@ public class Main {
             b = scanner.nextInt();
             c = a + b;
             System.out.println("Сумма введенных чисел соответствует " + c);
+            System.out.println("Попробуйте ввести числа снова");
         }
     }
 }
