@@ -13,7 +13,7 @@ public class Main {
             System.out.println("Введите второе число");
             b = scanner.nextInt();
             c = a + b;
-            System.out.println("Сумма введенных чисел соответствует " + c);
+            System.out.println("Сумма введенных чисел равняется " + c);
         }
     }
 }
