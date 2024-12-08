@@ -32,7 +32,7 @@ jobs:
         ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
 
     - name: Copy files to the server on Ubuntu
-      if: runner.os == 'Linux'
+      if: runner.os == 'ubuntu-latest'
       run: |
         scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
 
