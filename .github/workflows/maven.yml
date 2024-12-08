@@ -1,44 +1,58 @@
+# Именуем воркфлоу
 name: My first deploy workflow
 
+# Определеяем тригеры и ветки для запуска воркфлоу
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
+# Ставим задачи
 jobs:
   build:
-    runs-on: ${{ matrix.os }} # Используемая операционная система, выбирается из матрицы
+
+# Используем несколько операционных систем для тестов
+    runs-on: ${{ matrix.os }}
     strategy:
-      matrix: # Определение матрицы параметров для параллельного выполнения
+# Выбираем какие ОС будем использовать
+      matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
+# Клонируем репозиторий
     steps:
     - uses: actions/checkout@v4
 
+# Настраиваем среду выполнения
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
         cache: maven
+
+# Прогоняем тесты
     - name: Build and Test
       run: mvn clean install
 
+# Начинаем деплой
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
+# Устанавливаем соединение по SSH с виртуальной машиной
     steps:
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
       with:
         ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
 
+# Добавляем сервер в хосты, которым можно доверять
     - name: Add server to known_hosts
       run: |
         ssh-keyscan -H ${{ secrets.SSH_SERVER }} >> ~/.ssh/known_hosts
 
+# Заливаем файлы на виртуальную машину
     - name: Copy files to the server on Ubuntu
       if: runner.os == 'Linux'
       run: |
