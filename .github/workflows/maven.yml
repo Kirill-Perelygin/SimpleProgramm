@@ -38,5 +38,5 @@ jobs:
     - name: Copy files to the server on Ubuntu
       if: runner.os == 'Linux'
       run: |
-        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
+        rsync -avz --delete ./ ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
 
