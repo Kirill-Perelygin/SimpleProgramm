@@ -44,5 +44,5 @@ jobs:
     - name: Copy files to the server on Windows
       if: runner.os == 'Windows'
       run: |
-        scp -r -o StrictHostKeyChecking=no .\* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
+        scp -r -o StrictHostKeyChecking=no ./\* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
 
