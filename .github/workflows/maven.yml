@@ -26,13 +26,17 @@ jobs:
       run: mvn clean install
 
   deploy:
+  needs: build
+  runs-on: ubuntu-latest
+
+  steps:
     - name: Setup SSH
-    uses: webfactory/ssh-agent@v0.5.3
-    with:
-    ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
 
     - name: Copy files to the server on Ubuntu
-    if: runner.os == 'Linux'
-    run: |
-      scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
+      if: runner.os == 'Linux'
+      run: |
+        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}:/home/perelyginkirill/app
 
