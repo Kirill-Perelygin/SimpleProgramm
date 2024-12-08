@@ -33,5 +33,5 @@ jobs:
 
     - name: Copy files to the server
       run: |
-        scp -r -o StrictHostKeyChecking=no ./ ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}
+        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}
 
