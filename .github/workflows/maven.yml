@@ -31,7 +31,3 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
 
-    - name: Copy files to the server
-      run: |
-        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}
-
