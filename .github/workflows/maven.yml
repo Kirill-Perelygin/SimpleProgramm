@@ -24,3 +24,12 @@ jobs:
     - name: Build and Test
       run: mvn clean install
 
+    - name: Setup SSH
+          uses: webfactory/ssh-agent@v0.7.0
+          with:
+            ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
+
+        - name: Copy files to the server
+          run: |
+            rsync -avz --delete ./ ${{ secrets.USER }}@${{ secrets.SSH_SERVER }}
+
