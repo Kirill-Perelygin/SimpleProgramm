@@ -14,7 +14,7 @@ public class Main {
             b = scanner.nextInt();
             c = a + b;
             System.out.println("Сумма введенных чисел равняется " + c);
-            System.out.println("Попробуйте ввести числа занов");
+            System.out.println("Попробуйте ввести числа зано");
         }
     }
 }
