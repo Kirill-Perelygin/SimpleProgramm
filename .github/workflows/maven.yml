@@ -31,3 +31,18 @@ jobs:
       with:
         ssh-private-key: ${{ secrets.SSH_SECRET_KEY }}
 
+    - name: Copy files to the server on Ubuntu
+      if: runner.os == 'Linux'
+      run: |
+        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/path/to/your/app/
+
+    - name: Copy files to the server on macOS
+      if: runner.os == 'Darwin'
+      run: |
+        scp -r -o StrictHostKeyChecking=no ./* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/path/to/your/app/
+
+    - name: Copy files to the server on Windows
+      if: runner.os == 'Windows'
+      run: |
+        scp -r -o StrictHostKeyChecking=no .\* ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }}:/path/to/your/app/
+
